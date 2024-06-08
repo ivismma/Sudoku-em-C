@@ -10,7 +10,8 @@ int main(void){
 		  erros = 0;
 	
 	if(!lerMapa(M1, M2, &encontrados)){
-		printf("Falha na leitura do arquivo do mapa atual.\n");
+		printf("Falha na leitura do arquivo do mapa atual.\n\n");
+		system("pause");
 		return 1;
 	}
 	
@@ -20,8 +21,7 @@ int main(void){
 	mostrarInfo();
 	
 	do{ // loop do jogo..
-		mvprintw(25, 5, "Encontrados: %hd", encontrados);
-		mvprintw(26, 5, "Erros: %hd", erros);
+		atualizarStats(encontrados, erros);
 		exibeNumeros(M1, M2);
 		tPos pos = selecionar(&tentativa, M2);
 		if(tentativa == M1[pos.i][pos.j]){

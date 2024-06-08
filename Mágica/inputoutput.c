@@ -15,7 +15,6 @@ tPos selecionar(short *tentativa, bool M2[9][9]){
 	while(atual = mvinch(escolha.i, escolha.j), !selecionado){
 		tPos anterior = escolha;
 		mostrarEscolha(atual);
-		refresh();
 		
 		tecla = getch();
 		input(&escolha, tecla, &selecionado, M2);
@@ -65,12 +64,11 @@ void input(tPos *escolha, int tecla, bool *selecionado, bool M2[9][9]){
 }
 
 short palpitar(){
-	tPos atual = {20, 12}; // Número do meio
-	tPos anterior;
+	tPos atual = {20, 12}, anterior; // Começar no centro
 	mvprintw(18,5,"Inserir número:");
 	exibirSetas(atual);
-	refresh();
 	int tecla = KEY_LEFT;
+	short escolha = 0;
 	
 	while(tecla = getch()){
 		anterior = atual;
@@ -82,17 +80,29 @@ short palpitar(){
 				if(atual.j < 20) atual.j += 2;
 				break;
 			case '\n':
-				move(20,4);
-				clrtoeol();
-				move(18,4);
-				clrtoeol();
-				apagarSetas(atual);
-				return (atual.j/2)-1; // Número escolhido.
+				escolha = (atual.j/2)-1; // Número escolhido.
+				break;
+			default: // Possibilitar escolha teclando o número no teclado:
+				if(tecla >= '1' && tecla <= '9'){
+					char c = tecla;
+					escolha = (short) atoi(&c);
+				}
+				break;
+		}
+		if(escolha){
+			apagarSelecao(atual);
+			return escolha;
 		}
 		apagarSetas(anterior);
 		exibirSetas(atual);
-		refresh();
 	}
+}
+
+void apagarSelecao(tPos atual){
+	move(20,4);
+	clrtoeol();
+	move(18,4);
+	clrtoeol();
 }
 
 void apagarSetas(tPos pos){

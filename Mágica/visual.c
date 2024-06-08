@@ -25,7 +25,6 @@ void desenhaArea(){
 		mvprintw(i, 16, "#");
 	*/
 	areaEscolha();
-	refresh();
 }
 
 void exibeNumeros(short M[9][9], bool M2[9][9]){
@@ -62,8 +61,6 @@ void exibeNumeros(short M[9][9], bool M2[9][9]){
 				else
 					mvprintw(9+i, (2+2*j)+(k*8), "-");
 			}
-			
-	refresh();
 }
 
 void areaEscolha(){
@@ -71,8 +68,6 @@ void areaEscolha(){
 	mvprintw(15, 10, "#");
 	mvprintw(15, 14, "#");
 	for(int i = 0; i < 5; ++i) mvprintw(16, 10+i, "#");
-	//for(int i = 0; i < 3; ++i) mvprintw(15+i, 10, "#");
-	//for(int i = 0; i < 3; ++i) mvprintw(15+i, 14, "#");
 }
 
 void mostrarEscolha(char escolhaAtual){
@@ -84,6 +79,13 @@ void mostrarInfo(){
 	mvprintw(1, 29, "   Implementação do Sudoku pelo terminal com a biblioteca ncurses.");
 	mvprintw(5, 29, ">> WIP -> 1ª iteração do jogo. Muitas coisas a ainda serem feitas... <<");
 	mvprintw(12, 29, "Código por Ivis Muzi (=");
+	mvprintw(25, 5, "Encontrados:");
+	mvprintw(26, 5, "Erros:");
+}
+
+void atualizarStats(short enc, short erros){
+	mvprintw(25, 5, "Encontrados: %hd", enc);
+	mvprintw(26, 5, "Erros: %hd", erros);
 }
 
 void mostrarSelecao(){
