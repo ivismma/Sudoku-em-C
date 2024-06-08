@@ -3,9 +3,9 @@
 #include "jogo.h"
 
 bool lerMapa(short M1[9][9], bool M2[9][9], short *encontrados){
-	// 1º sudoku - teste...
-	FILE *sudoku = fopen("sudoku1a.dat", "r");
-	FILE *mostrar = fopen("sudoku1b.dat", "r");
+	// 1Âº sudoku - teste...
+	FILE *sudoku = fopen("./mapas/sudoku1a.dat", "r");
+	FILE *mostrar = fopen("./mapas/sudoku1b.dat", "r");
 	
 	// Verif. abertura..
 	if(sudoku == NULL || mostrar == NULL) return false;
@@ -31,4 +31,4 @@ bool lerMapa(short M1[9][9], bool M2[9][9], short *encontrados){
 
 // O arquivo a armazena todas as respostas do Sudoku atual, passando-as para matriz M1...
 // O arquivo b armazena quais devem ser mostradas na tela, passando-os para a matriz M2 (como booleanos)...
-/// a var. "encontrados" armazena quantos já estão sendo mostrados, o jogo termina com 81 (venceu o Sudoku).
+/// a var. "encontrados" armazena quantos jÃ¡ estÃ£o sendo mostrados, o jogo termina com 81 (venceu o Sudoku).
