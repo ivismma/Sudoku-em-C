@@ -24,11 +24,12 @@ int main(void){
 		atualizarStats(encontrados, erros);
 		exibeNumeros(M1, M2);
 		tPos pos = selecionar(&tentativa, M2);
-		if(tentativa == M1[pos.i][pos.j]){
-			M2[pos.i][pos.j] = true;
-			++encontrados;
-		}
-		else ++erros;
+		if(tentativa != 10) // 10 = Backspace <-> Cancelou a seleção...
+			if(tentativa == M1[pos.i][pos.j]){
+				M2[pos.i][pos.j] = true;
+				++encontrados;
+			}
+			else ++erros;
 	} while(encontrados < 81);
 	
 	endwin();

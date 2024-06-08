@@ -76,16 +76,22 @@ void mostrarEscolha(char escolhaAtual){
 }
 
 void mostrarInfo(){
-	mvprintw(1, 29, "   Implementação do Sudoku pelo terminal com a biblioteca ncurses.");
-	mvprintw(5, 29, ">> WIP -> 1ª iteração do jogo. Muitas coisas a ainda serem feitas... <<");
-	mvprintw(12, 29, "Código por Ivis Muzi (=");
-	mvprintw(25, 5, "Encontrados:");
-	mvprintw(26, 5, "Erros:");
+	mvprintw(0, 29, "   Implementação do Sudoku pelo terminal com a biblioteca ncurses.");
+	mvprintw(2, 29, ">> WIP -> 1ª iteração do jogo. Muitas coisas a ainda serem feitas... <<");
+	mvprintw(4, 29, "-----------------------------------------------------------------------");
+	mvprintw(23, 5, "Encontrados:");
+	mvprintw(24, 5, "Erros:");
+	mvprintw(6, 29, "Teclas do jogo:");
+	mvprintw(8, 29,  "Setas         -> Mover");
+	mvprintw(9, 29,  "ENTER         -> Confirmar");
+	mvprintw(10, 29, "BACKSPACE/Esc -> Cancelar ");
+	mvprintw(12, 29, "Obs: É possível inserir números teclando diretamente o número desejado.");
+	mvprintw(27, 5, "Código por Ivis Muzi (=");
 }
 
 void atualizarStats(short enc, short erros){
-	mvprintw(25, 5, "Encontrados: %hd", enc);
-	mvprintw(26, 5, "Erros: %hd", erros);
+	mvprintw(23, 18, "%hd", enc);
+	mvprintw(24, 18, "%hd", erros);
 }
 
 void mostrarSelecao(){

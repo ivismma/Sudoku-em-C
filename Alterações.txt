@@ -7,3 +7,5 @@
 - Implementado inserção de número no campo vazio teclando o número
 diretamente do teclado, sem utilizar as setas (mais rápido), totalmente opcional.
 - Otimizações no código.
+- Implementado possibilidade de cancelar a escolha Backspace ou Esc.
+- Melhorada robustez da leitura de teclas (com o objetivo de evitar problemas em outros SOs além do Windows).

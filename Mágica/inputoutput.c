@@ -6,12 +6,13 @@
 #define Y_INPUT 18
 
 tPos selecionar(short *tentativa, bool M2[9][9]){
-	tPos escolha = {6, 12}; // Meio da tela
+	static tPos escolha = {6, 12}; // Meio da tela
 	int tecla;
 	char atual; // Qual número está sendo selecionado? Obtido pela func. mvinch()
 	bool selecionado = false;
 	
 	exibirSetas(escolha);
+	
 	while(atual = mvinch(escolha.i, escolha.j), !selecionado){
 		tPos anterior = escolha;
 		mostrarEscolha(atual);
@@ -22,14 +23,58 @@ tPos selecionar(short *tentativa, bool M2[9][9]){
         mostrarEscolha(atual);
         apagarSetas(anterior);
         exibirSetas(escolha);
-	
 	}
 	mostrarSelecao();
 	*tentativa = palpitar();
-	apagarSetas(escolha);
+	
+	//apagarSetas(escolha);
 	
 	// Converter para M[i][j] --> descobrir i e j atual da matriz.
 	return converterPos(escolha);
+}
+
+short palpitar(){
+	tPos atual = {20, 12}, anterior; // Começar no centro
+	mvprintw(18,5,"Inserir número:");
+	exibirSetas(atual);
+	int tecla = KEY_LEFT;
+	short escolha = 0;
+	
+	while(tecla = getch()){
+		anterior = atual;
+		switch(tecla){
+			case KEY_LEFT:
+				if(atual.j > 4) atual.j -= 2;
+				break;
+			case KEY_RIGHT:
+				if(atual.j < 20) atual.j += 2;
+				break;
+			// Confirmar:
+			case KEY_ENTER: // ENTER
+			case 10:        // ENTER
+				escolha = (atual.j/2)-1; // Número escolhido.
+				break;
+			// Cancelar:
+			case 27:            // ESC
+			case KEY_BACKSPACE: // BACKSPACE
+			case '\b':          // BACKSPACE
+			case 127:           // BACKSPACE
+				escolha = 10;
+				break;
+			default: // Possibilitar escolha teclando o número no teclado:
+				if(tecla >= '1' && tecla <= '9'){
+					char c = tecla;
+					escolha = (short) atoi(&c);
+				}
+				break;
+		}
+		if(escolha){
+			apagarSelecao(atual);
+			return escolha;
+		}
+		apagarSetas(anterior);
+		exibirSetas(atual);
+	}
 }
 
 void input(tPos *escolha, int tecla, bool *selecionado, bool M2[9][9]){
@@ -55,7 +100,8 @@ void input(tPos *escolha, int tecla, bool *selecionado, bool M2[9][9]){
 			escolha->j += 2;
         	if(escolha->j == 8 || escolha->j == 16) escolha->j += 2;
         	break;
-        case '\n': // ENTER
+       	case 10:        // ENTER
+	    case KEY_ENTER: // ENTER
         	aux = converterPos(*escolha);
 			if(M2[aux.i][aux.j] == true) break;
         	*selecionado = true;
@@ -63,43 +109,8 @@ void input(tPos *escolha, int tecla, bool *selecionado, bool M2[9][9]){
     }
 }
 
-short palpitar(){
-	tPos atual = {20, 12}, anterior; // Começar no centro
-	mvprintw(18,5,"Inserir número:");
-	exibirSetas(atual);
-	int tecla = KEY_LEFT;
-	short escolha = 0;
-	
-	while(tecla = getch()){
-		anterior = atual;
-		switch(tecla){
-			case KEY_LEFT:
-				if(atual.j > 4) atual.j -= 2;
-				break;
-			case KEY_RIGHT:
-				if(atual.j < 20) atual.j += 2;
-				break;
-			case '\n':
-				escolha = (atual.j/2)-1; // Número escolhido.
-				break;
-			default: // Possibilitar escolha teclando o número no teclado:
-				if(tecla >= '1' && tecla <= '9'){
-					char c = tecla;
-					escolha = (short) atoi(&c);
-				}
-				break;
-		}
-		if(escolha){
-			apagarSelecao(atual);
-			return escolha;
-		}
-		apagarSetas(anterior);
-		exibirSetas(atual);
-	}
-}
-
 void apagarSelecao(tPos atual){
-	move(20,4);
+	move(20,3);
 	clrtoeol();
 	move(18,4);
 	clrtoeol();
