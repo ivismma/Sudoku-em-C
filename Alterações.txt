@@ -9,3 +9,13 @@ diretamente do teclado, sem utilizar as setas (mais rápido), totalmente opciona
 - Otimizações no código.
 - Implementado possibilidade de cancelar a escolha Backspace ou Esc.
 - Melhorada robustez da leitura de teclas (com o objetivo de evitar problemas em outros SOs além do Windows).
+
+10/06/2024:
+
+- Alterado loop contínuo de exibição da tela do jogo para uma única impressão na tela ao inicializar o jogo, impressões subsequentes
+só irão acontecer quando um novo número for encontrado, economizando recursos (ou não.. afinal, é um jogo de terminal)
+- E diversas outras otimizações.
+- Alterado a leitura do arquivo do sudoku de 2 arquivos para 1, mecanismo: O arquivo sudoku1.dat por exemplo, possui a matriz completa
+com o sudoku, os valores negativos sinalizam que o número deverá ser encontrado (campo vazio), conforme o usuário vá achando os
+núemeros o valor na matriz é multiplicado por -1 e então ele é mostrado na tela.
+- Alterado a stat "Encontrados" para "Faltam encontrar", agora mostra na tela quantos faltam ao invés de quantos já foram encontrados.

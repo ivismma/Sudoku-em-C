@@ -2,33 +2,29 @@
 
 #include "jogo.h"
 
-bool lerMapa(short M1[9][9], bool M2[9][9], short *encontrados){
-	// 1Âº sudoku - teste...
-	FILE *sudoku = fopen("./mapas/sudoku1a.dat", "r");
-	FILE *mostrar = fopen("./mapas/sudoku1b.dat", "r");
+bool lerMapa(short M1[9][9], short *encontrados){
+	// 1º sudoku - teste...
+	FILE *sudoku = fopen("./mapas/sudoku1.dat", "r");
 	
 	// Verif. abertura..
-	if(sudoku == NULL || mostrar == NULL) return false;
+	if(sudoku == NULL) return false;
 	
-	short num1, num2;
+	short num1;
 	for(int i = 0; i < 9; ++i){
 		for(int j = 0; j < 9; ++j){
 			fscanf(sudoku, "%hd", &num1);
-			fscanf(mostrar, "%hd", &num2);
 			M1[i][j] = num1;
-			if(num1 == num2){
-				M2[i][j] = true;
-				++*encontrados;
-			}
-			else M2[i][j] = false;
+			if(num1 > 0) ++*encontrados;
 		}
 	}
 	fclose(sudoku);
-	fclose(mostrar);
 	
 	return true;
 }
 
-// O arquivo a armazena todas as respostas do Sudoku atual, passando-as para matriz M1...
-// O arquivo b armazena quais devem ser mostradas na tela, passando-os para a matriz M2 (como booleanos)...
-/// a var. "encontrados" armazena quantos jÃ¡ estÃ£o sendo mostrados, o jogo termina com 81 (venceu o Sudoku).
+/*
+O arquivo sudoku(numero).dat armazena o "mapa" completo do sudoku atual, os valores negativos são os campos
+onde não deverão ser mostrados para o jogador. Conforme o jogador encontre os valores, estes terão seus valores
+na matriz multiplicado por (-1), transformando-o em positivo e mostrando-o na tela. (A condição que verifica se
+o número deve ser mostrado ou não está na função exibeNumeros).
+*/

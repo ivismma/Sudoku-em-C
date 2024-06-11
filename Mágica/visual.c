@@ -27,14 +27,14 @@ void desenhaArea(){
 	areaEscolha();
 }
 
-void exibeNumeros(short M[9][9], bool M2[9][9]){
+void exibeNumeros(short M[9][9]){
 	int i, j, k;
 	// Primeira linha de células 3x3.
 	for(k = 0; k < 3; ++k)
 		for(i = 0; i < 3; ++i)
 			for(j = 0; j < 3; ++j){
 				short c = j+3*k;
-				if(M2[i][c])
+				if(M[i][c] > 0)
 					mvprintw(1+i, (2+2*j)+(k*8), "%hd", M[i][c]);
 				else
 					mvprintw(1+i, (2+2*j)+(k*8), "-");
@@ -45,7 +45,7 @@ void exibeNumeros(short M[9][9], bool M2[9][9]){
 		for(i = 0; i < 3; ++i)
 			for(j = 0; j < 3; ++j){
 				short l = i+3, c = j+3*k;
-				if(M2[l][c])
+				if(M[l][c] > 0)
 					mvprintw(5+i, (2+2*j)+(k*8), "%hd", M[l][c]);
 				else
 					mvprintw(5+i, (2+2*j)+(k*8), "-");
@@ -56,11 +56,17 @@ void exibeNumeros(short M[9][9], bool M2[9][9]){
 		for(i = 0; i < 3; ++i)
 			for(j = 0; j < 3; ++j){
 				short l = i+6, c = j+3*k;
-				if(M2[l][c])
+				if(M[l][c] > 0)
 					mvprintw(9+i, (2+2*j)+(k*8), "%hd", M[l][c]);
 				else
 					mvprintw(9+i, (2+2*j)+(k*8), "-");
 			}
+}
+
+void exibeAcerto(tPos pos, short num){
+	pos.i = (pos.i < 3)? pos.i+1 : (pos.i < 6)? pos.i+2 : pos.i+3;
+	pos.j = (pos.j < 3)? pos.j*2+2 : (pos.j < 6)? pos.j*2 + 4 : pos.j*2 + 6; 
+	mvprintw(pos.i, pos.j, "%hd", num);
 }
 
 void areaEscolha(){
@@ -79,7 +85,7 @@ void mostrarInfo(){
 	mvprintw(0, 29, "   Implementação do Sudoku pelo terminal com a biblioteca ncurses.");
 	mvprintw(2, 29, ">> WIP -> 1ª iteração do jogo. Muitas coisas a ainda serem feitas... <<");
 	mvprintw(4, 29, "-----------------------------------------------------------------------");
-	mvprintw(23, 5, "Encontrados:");
+	mvprintw(23, 5, "Faltam:");
 	mvprintw(24, 5, "Erros:");
 	mvprintw(6, 29, "Teclas do jogo:");
 	mvprintw(8, 29,  "Setas         -> Mover");
@@ -90,10 +96,33 @@ void mostrarInfo(){
 }
 
 void atualizarStats(short enc, short erros){
-	mvprintw(23, 18, "%hd", enc);
-	mvprintw(24, 18, "%hd", erros);
+	mvprintw(23, 16, "%hd", 81-enc);
+	mvprintw(24, 16, "%hd", erros);
 }
 
 void mostrarSelecao(){
 	mvprintw(20,4, "1 2 3 4 5 6 7 8 9");
+}
+
+void apagarSelecao(tPos atual){
+	move(20,3);
+	clrtoeol();
+	move(18,4);
+	clrtoeol();
+}
+
+void apagarSetas(tPos pos){
+	mvprintw(pos.i, pos.j-1, " ");
+    mvprintw(pos.i, pos.j+1, " ");
+}
+
+void exibirSetas(tPos pos){
+	mvprintw(pos.i, pos.j-1, ">");
+    mvprintw(pos.i, pos.j+1, "<");
+}
+
+void desenhaJogo(short M1[9][9]){
+	desenhaArea();
+	exibeNumeros(M1);
+	mostrarInfo();
 }

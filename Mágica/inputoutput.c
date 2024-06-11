@@ -5,7 +5,19 @@
 #define X_INPUT 5
 #define Y_INPUT 18
 
-tPos selecionar(short *tentativa, bool M2[9][9]){
+
+
+// Retorna true se acertou, false caso contrário.
+// Libera a exibição do número, caso o usuário acerte.
+bool verificaAcerto(short tentativa, tPos pos, short M1[9][9]){
+		if(tentativa == -M1[pos.i][pos.j]){
+			M1[pos.i][pos.j] *= -1;
+			exibeAcerto(pos, tentativa);
+			return true;
+		} return false;
+}
+
+tPos selecionar(short *tentativa, short M1[9][9]){
 	static tPos escolha = {6, 12}; // Meio da tela
 	int tecla;
 	char atual; // Qual número está sendo selecionado? Obtido pela func. mvinch()
@@ -18,7 +30,7 @@ tPos selecionar(short *tentativa, bool M2[9][9]){
 		mostrarEscolha(atual);
 		
 		tecla = getch();
-		input(&escolha, tecla, &selecionado, M2);
+		input(&escolha, tecla, &selecionado, M1);
 		
         mostrarEscolha(atual);
         apagarSetas(anterior);
@@ -77,7 +89,7 @@ short palpitar(){
 	}
 }
 
-void input(tPos *escolha, int tecla, bool *selecionado, bool M2[9][9]){
+void input(tPos *escolha, int tecla, bool *selecionado, short M1[9][9]){
 	tPos aux;
 	switch (tecla){
         case KEY_UP:
@@ -103,27 +115,10 @@ void input(tPos *escolha, int tecla, bool *selecionado, bool M2[9][9]){
        	case 10:        // ENTER
 	    case KEY_ENTER: // ENTER
         	aux = converterPos(*escolha);
-			if(M2[aux.i][aux.j] == true) break;
+			if(M1[aux.i][aux.j] > 0) break;
         	*selecionado = true;
         	break;
     }
-}
-
-void apagarSelecao(tPos atual){
-	move(20,3);
-	clrtoeol();
-	move(18,4);
-	clrtoeol();
-}
-
-void apagarSetas(tPos pos){
-	mvprintw(pos.i, pos.j-1, " ");
-    mvprintw(pos.i, pos.j+1, " ");
-}
-
-void exibirSetas(tPos pos){
-	mvprintw(pos.i, pos.j-1, ">");
-    mvprintw(pos.i, pos.j+1, "<");
 }
 
 tPos converterPos(tPos pos){
