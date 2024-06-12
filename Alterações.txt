@@ -19,3 +19,10 @@ só irão acontecer quando um novo número for encontrado, economizando recursos
 com o sudoku, os valores negativos sinalizam que o número deverá ser encontrado (campo vazio), conforme o usuário vá achando os
 núemeros o valor na matriz é multiplicado por -1 e então ele é mostrado na tela.
 - Alterado a stat "Encontrados" para "Faltam encontrar", agora mostra na tela quantos faltam ao invés de quantos já foram encontrados.
+
+12/06/2024:
+- Removido geração do mapa por leitura de arquivo para **geração randômica do tabuleiro Sudoku**.
+       > geracao.c
+- Por padrão (provisório) o jogo inicia com 52 campos vazios.
+
+- Mais melhorias no código.

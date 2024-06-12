@@ -27,40 +27,40 @@ void desenhaArea(){
 	areaEscolha();
 }
 
-void exibeNumeros(short M[9][9]){
+void exibeNumeros(short M[N][N]){
 	int i, j, k;
 	// Primeira linha de células 3x3.
 	for(k = 0; k < 3; ++k)
-		for(i = 0; i < 3; ++i)
-			for(j = 0; j < 3; ++j){
-				short c = j+3*k;
-				if(M[i][c] > 0)
-					mvprintw(1+i, (2+2*j)+(k*8), "%hd", M[i][c]);
-				else
-					mvprintw(1+i, (2+2*j)+(k*8), "-");
-			}
-				
-	// Segunda linha de células 3x3.
-	for(k = 0; k < 3; ++k)
-		for(i = 0; i < 3; ++i)
-			for(j = 0; j < 3; ++j){
-				short l = i+3, c = j+3*k;
-				if(M[l][c] > 0)
-					mvprintw(5+i, (2+2*j)+(k*8), "%hd", M[l][c]);
-				else
-					mvprintw(5+i, (2+2*j)+(k*8), "-");
-			}
-				
-	// Terceira linha de células 3x3.	
-	for(k = 0; k < 3; ++k)
-		for(i = 0; i < 3; ++i)
-			for(j = 0; j < 3; ++j){
-				short l = i+6, c = j+3*k;
-				if(M[l][c] > 0)
-					mvprintw(9+i, (2+2*j)+(k*8), "%hd", M[l][c]);
-				else
-					mvprintw(9+i, (2+2*j)+(k*8), "-");
-			}
+			for(i = 0; i < 3; ++i)
+				for(j = 0; j < 3; ++j){
+					short c = j+3*k;
+					if(M[i][c] > 0)
+						mvprintw(1+i, (2+2*j)+(k*8), "%hd", M[i][c]);
+					else
+						mvprintw(1+i, (2+2*j)+(k*8), "-");
+				}
+					
+		// Segunda linha de células 3x3.
+		for(k = 0; k < 3; ++k)
+			for(i = 0; i < 3; ++i)
+				for(j = 0; j < 3; ++j){
+					short l = i+3, c = j+3*k;
+					if(M[l][c] > 0)
+						mvprintw(5+i, (2+2*j)+(k*8), "%hd", M[l][c]);
+					else
+						mvprintw(5+i, (2+2*j)+(k*8), "-");
+				}
+					
+		// Terceira linha de células 3x3.	
+		for(k = 0; k < 3; ++k)
+			for(i = 0; i < 3; ++i)
+				for(j = 0; j < 3; ++j){
+					short l = i+6, c = j+3*k;
+					if(M[l][c] > 0)
+						mvprintw(9+i, (2+2*j)+(k*8), "%hd", M[l][c]);
+					else
+						mvprintw(9+i, (2+2*j)+(k*8), "-");
+				}
 }
 
 void exibeAcerto(tPos pos, short num){
@@ -83,15 +83,16 @@ void mostrarEscolha(char escolhaAtual){
 
 void mostrarInfo(){
 	mvprintw(0, 29, "   Implementação do Sudoku pelo terminal com a biblioteca ncurses.");
-	mvprintw(2, 29, ">> WIP -> 1ª iteração do jogo. Muitas coisas a ainda serem feitas... <<");
-	mvprintw(4, 29, "-----------------------------------------------------------------------");
+	// mvprintw(2, 29, "");
+	mvprintw(2, 29, "-----------------------------------------------------------------------");
+
+	mvprintw(4, 29, "Teclas do jogo:");
+	mvprintw(6, 29,  "Setas         -> Mover");
+	mvprintw(7, 29,  "ENTER         -> Confirmar");
+	mvprintw(8, 29, "BACKSPACE/Esc -> Cancelar ");
+	mvprintw(10, 29, "Obs: É possível inserir números teclando diretamente o número desejado.");
 	mvprintw(23, 5, "Faltam:");
 	mvprintw(24, 5, "Erros:");
-	mvprintw(6, 29, "Teclas do jogo:");
-	mvprintw(8, 29,  "Setas         -> Mover");
-	mvprintw(9, 29,  "ENTER         -> Confirmar");
-	mvprintw(10, 29, "BACKSPACE/Esc -> Cancelar ");
-	mvprintw(12, 29, "Obs: É possível inserir números teclando diretamente o número desejado.");
 	mvprintw(27, 5, "Código por Ivis Muzi (=");
 }
 
@@ -121,7 +122,7 @@ void exibirSetas(tPos pos){
     mvprintw(pos.i, pos.j+1, "<");
 }
 
-void desenhaJogo(short M1[9][9]){
+void desenhaJogo(short M1[N][N]){
 	desenhaArea();
 	exibeNumeros(M1);
 	mostrarInfo();

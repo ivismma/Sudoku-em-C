@@ -9,7 +9,7 @@
 
 // Retorna true se acertou, false caso contrário.
 // Libera a exibição do número, caso o usuário acerte.
-bool verificaAcerto(short tentativa, tPos pos, short M1[9][9]){
+bool verificaAcerto(short tentativa, tPos pos, short M1[N][N]){
 		if(tentativa == -M1[pos.i][pos.j]){
 			M1[pos.i][pos.j] *= -1;
 			exibeAcerto(pos, tentativa);
@@ -17,7 +17,7 @@ bool verificaAcerto(short tentativa, tPos pos, short M1[9][9]){
 		} return false;
 }
 
-tPos selecionar(short *tentativa, short M1[9][9]){
+tPos selecionar(short *tentativa, short M1[N][N]){
 	static tPos escolha = {6, 12}; // Meio da tela
 	int tecla;
 	char atual; // Qual número está sendo selecionado? Obtido pela func. mvinch()
@@ -38,8 +38,6 @@ tPos selecionar(short *tentativa, short M1[9][9]){
 	}
 	mostrarSelecao();
 	*tentativa = palpitar();
-	
-	//apagarSetas(escolha);
 	
 	// Converter para M[i][j] --> descobrir i e j atual da matriz.
 	return converterPos(escolha);
@@ -89,7 +87,7 @@ short palpitar(){
 	}
 }
 
-void input(tPos *escolha, int tecla, bool *selecionado, short M1[9][9]){
+void input(tPos *escolha, int tecla, bool *selecionado, short M1[N][N]){
 	tPos aux;
 	switch (tecla){
         case KEY_UP:
