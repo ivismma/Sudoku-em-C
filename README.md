@@ -1,4 +1,4 @@
-Sudoku em C utilizando biblioteca ncurses, ainda faltam muitas implementações a serem feitas.<br>
+Sudoku em linguagem C utilizando biblioteca ncurses..<br>
 Geração randômica do tabuleiro Sudoku utilizando semente genérica para geração aleatória.<br> 
 > Seed: Relógio do computador -> time(0).
 
