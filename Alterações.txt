@@ -26,3 +26,9 @@ núemeros o valor na matriz é multiplicado por -1 e então ele é mostrado na t
 - Por padrão (provisório) o jogo inicia com 52 campos vazios.
 
 - Mais melhorias no código.
+
+24/06/2024:
+- Alterado geração randômica de time(NULL) para seed em valor inteiro
+> Seed inserida via teclado antes da inicialização do jogo.
+> Cada tabuleiro e células são dependentes da seed, ou seja, cada seed gera um mesmo mapa com as mesmas células (posições) vazias.
+> Após leitura da seed (int de 8 dígitos), caso válida, gera o tabuleiro e inicia o jogo.

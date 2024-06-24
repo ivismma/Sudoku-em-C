@@ -93,7 +93,8 @@ void mostrarInfo(){
 	mvprintw(10, 29, "Obs: É possível inserir números teclando diretamente o número desejado.");
 	mvprintw(23, 5, "Faltam:");
 	mvprintw(24, 5, "Erros:");
-	mvprintw(27, 5, "Código por Ivis Muzi (=");
+	mvprintw(27, 5, "Seed: %d", seed);
+	mvprintw(50, 5, "Código por Ivis Muzi (=");
 }
 
 void atualizarStats(short enc, short erros){

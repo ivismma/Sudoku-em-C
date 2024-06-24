@@ -4,8 +4,7 @@
 // Coordenada da linha que contém a mensagem de inserir palpite:
 #define X_INPUT 5
 #define Y_INPUT 18
-
-
+#define SEED_DIGS 8 // Quantidade de dígitos da seed - Obs: seed é um (int).
 
 // Retorna true se acertou, false caso contrário.
 // Libera a exibição do número, caso o usuário acerte.
@@ -124,4 +123,27 @@ tPos converterPos(tPos pos){
 	pos.i = (pos.i <= 4)? pos.i-1 : (pos.i <= 7)? pos.i-2 : pos.i-3;
 	pos.j = (pos.j <= 6)? (pos.j-2)/2 : (pos.j <= 15)? (pos.j-4)/2 : (pos.j-6)/2;
 	return pos;
+}
+
+void lerSeed(){
+	char c, buffer[SEED_DIGS+1];
+	bool seedValida; // Se não contém letras/simbolos/etc..
+	int i = 0;
+	do{
+		seedValida = true;
+		printf("Digite a seed de até 8 dígitos para a geração do Sudoku (somente números):\n--> ");
+		for(i = 0; i < SEED_DIGS; ++i){
+			c = getchar();
+			if(c == '\n') break;
+			else if(c < '0' || c > '9'){
+				TRY:
+				seedValida = false;
+				printf("Seed inválida\n");
+				break;
+			}
+			else buffer[i] = c; // OK.
+		}
+	} while(!seedValida);
+	buffer[i] = '\0';
+	seed = atoi(buffer);
 }

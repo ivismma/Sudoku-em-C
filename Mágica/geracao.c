@@ -4,7 +4,8 @@
 
 // Gera o tabuleiro Sudoku randômico e recebe como argumento quantos deverão ser campos vazios.
 void gerarSudoku(short M[N][N], short camposVazios){
-    for(int i = 0; i < N; ++i)
+    printf("Gerando tabuleiro Sudoku...\n");
+	for(int i = 0; i < N; ++i)
         for(int j = 0; j < N; ++j)
             M[i][j] = 0;
 
@@ -15,18 +16,6 @@ void gerarSudoku(short M[N][N], short camposVazios){
 // Apaga uma quantidade definida de campos no Sudoku.
 // O argumento "camposVazios" irá nivelar a  dificuldade
 // do Sudoku com base na quantidade apagada.
-
-void apagarCampos(short M[N][N], short camposVazios){
-    short cont = 0;
-    while(cont < camposVazios){
-        int lin = rand()%N;
-        int col = rand()%N;
-        if(M[lin][col] > 0){
-            M[lin][col] *= -1; // valor na matriz torna-se positivo (mostrar na tela).
-            ++cont;
-        }
-    }
-}
 
 bool posicaoValida(short M[N][N], int lin, int col, int num){
     for (int x = 0; x < N; ++x)
@@ -74,4 +63,16 @@ bool preencherSudoku(short M[N][N], int lin, int col){
         }
     }
     return false;
+}
+
+void apagarCampos(short M[N][N], short camposVazios){
+    short cont = 0;
+    while(cont < camposVazios){
+        int lin = rand()%N;
+        int col = rand()%N;
+        if(M[lin][col] > 0){
+            M[lin][col] *= -1; // valor na matriz torna-se positivo (mostrar na tela).
+            ++cont;
+        }
+    }
 }

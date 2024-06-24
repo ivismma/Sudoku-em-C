@@ -13,7 +13,10 @@ typedef struct{
 	short j; // Coluna (x)
 } tPos;
 
+extern int seed;
+
 // inputoutput.c
+void lerSeed();
 tPos selecionar(short *tentativa, short M1[N][N]);
 void input(tPos *escolha, int tecla, bool *selecionado, short M1[N][N]);
 bool verificaAcerto(short tentativa, tPos pos, short M1[N][N]);
@@ -40,7 +43,7 @@ bool posicaoValida(short M[N][N], int lin, int col, int num);
 bool preencherSudoku(short M[N][N], int lin, int col);
 void gerarSudoku(short M[N][N], short camposVazios);
 void apagarCampos(short M[N][N], short camposVazios);
-
+void lerSeed();
 
 
 // filereading.c (não mais sendo usada)
