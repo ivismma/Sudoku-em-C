@@ -1,13 +1,13 @@
-// inputoutput.c - Input Management - FunÁıes que gerenciam I/O do jogo e afins..
+// inputoutput.c - Input Management - Fun√ß√µes que gerenciam I/O do jogo e afins..
 #include "jogo.h"
 
-// Coordenada da linha que contÈm a mensagem de inserir palpite:
+// Coordenada da linha que cont√©m a mensagem de inserir palpite:
 #define X_INPUT 5
 #define Y_INPUT 18
-#define SEED_DIGS 8 // Quantidade de dÌgitos da seed - Obs: seed È um (int).
+#define SEED_DIGS 8 // Quantidade de d√≠gitos da seed - Obs: seed √© um (int).
 
-// Retorna true se acertou, false caso contr·rio.
-// Libera a exibiÁ„o do n˙mero, caso o usu·rio acerte.
+// Retorna true se acertou, false caso contr√°rio.
+// Libera a exibi√ß√£o do n√∫mero, caso o usu√°rio acerte.
 bool verificaAcerto(short tentativa, tPos pos, short M1[N][N]){
 		if(tentativa == -M1[pos.i][pos.j]){
 			M1[pos.i][pos.j] *= -1;
@@ -19,7 +19,7 @@ bool verificaAcerto(short tentativa, tPos pos, short M1[N][N]){
 tPos selecionar(short *tentativa, short M1[N][N]){
 	static tPos escolha = {6, 12}; // Meio da tela
 	int tecla;
-	char atual; // Qual n˙mero est· sendo selecionado? Obtido pela func. mvinch()
+	char atual; // Qual n√∫mero est√° sendo selecionado? Obtido pela func. mvinch()
 	bool selecionado = false;
 	
 	exibirSetas(escolha);
@@ -43,8 +43,8 @@ tPos selecionar(short *tentativa, short M1[N][N]){
 }
 
 short palpitar(){
-	tPos atual = {20, 12}, anterior; // ComeÁar no centro
-	mvprintw(18,5,"Inserir n˙mero:");
+	tPos atual = {20, 12}, anterior; // Come√ßar no centro
+	mvprintw(18,5,"Inserir n√∫mero:");
 	exibirSetas(atual);
 	int tecla = KEY_LEFT;
 	short escolha = 0;
@@ -61,7 +61,7 @@ short palpitar(){
 			// Confirmar:
 			case KEY_ENTER: // ENTER
 			case 10:        // ENTER
-				escolha = (atual.j/2)-1; // N˙mero escolhido.
+				escolha = (atual.j/2)-1; // N√∫mero escolhido.
 				break;
 			// Cancelar:
 			case 27:            // ESC
@@ -70,7 +70,7 @@ short palpitar(){
 			case 127:           // BACKSPACE
 				escolha = 10;
 				break;
-			default: // Possibilitar escolha teclando o n˙mero no teclado:
+			default: // Possibilitar escolha teclando o n√∫mero no teclado:
 				if(tecla >= '1' && tecla <= '9'){
 					char c = tecla;
 					escolha = (short) atoi(&c);
@@ -90,22 +90,22 @@ void input(tPos *escolha, int tecla, bool *selecionado, short M1[N][N]){
 	tPos aux;
 	switch (tecla){
         case KEY_UP:
-        	if(escolha->i == 1) break; // Limite da ·rea do jogo...
+        	if(escolha->i == 1) break; // Limite da √°rea do jogo...
 			--escolha->i;
         	if(escolha->i == 4 || escolha->i == 8) --escolha->i;
 			break;
         case KEY_DOWN:
-        	if(escolha->i == 11) break; // Limite da ·rea do jogo...
+        	if(escolha->i == 11) break; // Limite da √°rea do jogo...
 			++escolha->i;
         	if(escolha->i == 4 || escolha->i == 8) ++escolha->i;
 			break;
         case KEY_LEFT:
-        	if(escolha->j == 2) break; // Limite da ·rea do jogo...
+        	if(escolha->j == 2) break; // Limite da √°rea do jogo...
 			escolha->j -= 2;
         	if(escolha->j == 8 || escolha->j == 16) escolha->j -= 2;
         	break;
         case KEY_RIGHT:
-        	if(escolha->j == 22) break; // Limite da ·rea do jogo...
+        	if(escolha->j == 22) break; // Limite da √°rea do jogo...
 			escolha->j += 2;
         	if(escolha->j == 8 || escolha->j == 16) escolha->j += 2;
         	break;
@@ -127,18 +127,17 @@ tPos converterPos(tPos pos){
 
 void lerSeed(){
 	char c, buffer[SEED_DIGS+1];
-	bool seedValida; // Se n„o contÈm letras/simbolos/etc..
+	bool seedValida; // Se n√£o cont√©m letras/simbolos/etc..
 	int i = 0;
 	do{
 		seedValida = true;
-		printf("Digite a seed de atÈ 8 dÌgitos para a geraÁ„o do Sudoku (somente n˙meros):\n--> ");
+		printf("Digite a seed de at√© 8 d√≠gitos para a gera√ß√£o do Sudoku (somente n√∫meros):\n--> ");
 		for(i = 0; i < SEED_DIGS; ++i){
 			c = getchar();
 			if(c == '\n') break;
 			else if(c < '0' || c > '9'){
-				TRY:
 				seedValida = false;
-				printf("Seed inv·lida\n");
+				printf("Seed inv√°lida\n");
 				break;
 			}
 			else buffer[i] = c; // OK.
