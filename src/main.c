@@ -21,13 +21,11 @@ int main(void){
 	desenhaJogo(M1);
 	
 	do{ // loop do jogo..
-	
-		atualizarStats(encontrados, erros);
 		tPos pos = selecionar(&tentativa, M1);
+		atualizarStats(encontrados, erros);
 		if(tentativa != 10) // Não cancelou a inserção (Esc, backspace..)
 			if(verificaAcerto(tentativa, pos, M1)) ++encontrados;
 			else ++erros;
-		
 	} while(encontrados < 81);
 	
 	endwin();

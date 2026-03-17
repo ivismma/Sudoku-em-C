@@ -32,3 +32,6 @@ núemeros o valor na matriz é multiplicado por -1 e então ele é mostrado na t
 > Seed inserida via teclado antes da inicialização do jogo.
 > Cada tabuleiro e células são dependentes da seed, ou seja, cada seed gera um mesmo mapa com as mesmas células (posições) vazias.
 > Após leitura da seed (int de 8 dígitos), caso válida, gera o tabuleiro e inicia o jogo.
+
+16/03/2026:
+- Removido lib windows.h desnecessária. Pronto p/ compilar no Linux.
